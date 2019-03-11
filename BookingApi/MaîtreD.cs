@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#nullable enable
+
 namespace Ploeh.Samples.BookingApi
 {
     public class MaîtreD
@@ -27,7 +29,7 @@ namespace Ploeh.Samples.BookingApi
             return new Maybe<Reservation>(reservation.Accept());
         }
 
-        public Reservation TryAcceptNullable(
+        public Reservation? TryAcceptNullable(
             Reservation[] reservations,
             Reservation reservation)
         {

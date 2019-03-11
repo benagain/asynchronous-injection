@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+
+#nullable enable
 
 namespace Ploeh.Samples.BookingApi
 {
@@ -24,7 +26,7 @@ namespace Ploeh.Samples.BookingApi
         public async Task<IActionResult> Post(Reservation reservation)
         {
             return await Repository.ReadReservations(reservation.Date)
-                .Select(rs => maîtreD.TryAccept(rs, reservation))
+                .Select(rs => maîtreD.TryAcceptNullable(rs, reservation))
                 .SelectMany(m => m.Traverse(Repository.Create))
                 .Match(InternalServerError("Table unavailable"), Ok);
         }
