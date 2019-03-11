@@ -17,19 +17,7 @@ namespace Ploeh.Samples.BookingApi
 
         public int Capacity { get; }
 
-        public Maybe<Reservation> TryAccept(
-            Reservation[] reservations,
-            Reservation reservation)
-        {
-            int reservedSeats = reservations.Sum(r => r.Quantity);
-
-            if (Capacity < reservedSeats + reservation.Quantity)
-                return new Maybe<Reservation>();
-
-            return new Maybe<Reservation>(reservation.Accept());
-        }
-
-        public Reservation? TryAcceptNullable(
+        public Reservation? TryAccept(
             Reservation[] reservations,
             Reservation reservation)
         {
