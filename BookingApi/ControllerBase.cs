@@ -10,9 +10,9 @@ namespace Ploeh.Samples.BookingApi
         // generically typed, and that the value is of the type T.
         // This specific type, though, is to catch type errors in the example
         // code, in lieu of unit tests.
-        public IActionResult Ok(int value)
+        public IActionResult Ok(IntBox value)
         {
-            return new OkActionResult(value);
+            return new OkActionResult(value.Value);
         }
 
         public IActionResult InternalServerError(string msg)

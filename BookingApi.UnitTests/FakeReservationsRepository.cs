@@ -15,13 +15,13 @@ namespace Ploeh.Samples.BookingApi.UnitTests
             reservations = new List<Reservation>();
         }
 
-        public Task<int> Create(Reservation reservation)
+        public Task<IntBox> Create(Reservation reservation)
         {
             reservations.Add(reservation);
             // Hardly a robut implementation, since indices will be reused,
             // but should be good enough for the purpose of a pair of
             // integration tests
-            return Task.FromResult(reservations.IndexOf(reservation));
+            return Task.FromResult(new IntBox(reservations.IndexOf(reservation)));
         }
 
         public Task<Reservation[]> ReadReservations(DateTimeOffset date)
