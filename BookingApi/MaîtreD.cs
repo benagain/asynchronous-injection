@@ -26,5 +26,17 @@ namespace Ploeh.Samples.BookingApi
 
             return new Maybe<Reservation>(reservation.Accept());
         }
+
+        public Reservation TryAcceptNullable(
+            Reservation[] reservations,
+            Reservation reservation)
+        {
+            int reservedSeats = reservations.Sum(r => r.Quantity);
+
+            if (Capacity < reservedSeats + reservation.Quantity)
+                return null;
+
+            return reservation.Accept();
+        }
     }
 }

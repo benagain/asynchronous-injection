@@ -22,9 +22,9 @@ namespace Ploeh.Samples.BookingApi.UnitTests
             sut = sut.WithCapacity(
                 reservedSeats + reservation.Quantity + excessCapacity);
 
-            var actual = sut.TryAccept(reservations, reservation);
+            var actual = sut.TryAcceptNullable(reservations, reservation);
 
-            Assert.Equal(new Maybe<Reservation>(reservation.Accept()), actual);
+            Assert.Equal(reservation.Accept(), actual);
         }
 
         [Theory, BookingApiTestConventions]
@@ -36,9 +36,9 @@ namespace Ploeh.Samples.BookingApi.UnitTests
             var reservedSeats = reservations.Sum(r => r.Quantity);
             sut = sut.WithCapacity(reservedSeats + reservation.Quantity - 1);
 
-            var actual = sut.TryAccept(reservations, reservation);
+            var actual = sut.TryAcceptNullable(reservations, reservation);
 
-            Assert.True(actual.IsNothing);
+            Assert.Null(actual);
             Assert.False(reservation.IsAccepted);
         }
     }
